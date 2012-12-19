@@ -386,7 +386,10 @@ public class SeamPhaseListener implements PhaseListener
    protected void afterRestoreView(FacesContext facesContext)
    {	   
 	   boolean conversationFound = Contexts.isPageContextActive() ? Contexts.getPageContext().isSet("org.jboss.seam.jsf.SeamPhaseListener.conversationFound") : false;
-	   FacesLifecycle.resumePage();
+	   
+	   if (!Contexts.isPageContextActive()) {
+	      FacesLifecycle.resumePage();
+	   }
 	   Map parameters = facesContext.getExternalContext().getRequestParameterMap();
 	   if (!conversationFound) // there is exceptional case when restoring of conversation wasn't called while page context was lazily initialized
 	   {

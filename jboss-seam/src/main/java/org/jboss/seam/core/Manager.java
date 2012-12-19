@@ -335,19 +335,26 @@ public class Manager
    // DONT BREAK, icefaces uses this
    public boolean isLongRunningConversation()
    {
+      log.debug("isLongRunningConversation? " + isLongRunningConversation);
       return isLongRunningConversation;
    }
 
    public boolean isLongRunningOrNestedConversation()
    {
-      return isLongRunningConversation() || isNestedConversation();
+      boolean ret = isLongRunningConversation() || isNestedConversation();
+      log.debug("isLongRunningOrNestedConversation? " + ret);
+      return ret;
    }
 
    public boolean isReallyLongRunningConversation()
    {
-      return isLongRunningConversation() && 
+      boolean ret = isLongRunningConversation() && 
             !getCurrentConversationEntry().isRemoveAfterRedirect() &&
             !Session.instance().isInvalid();
+      
+      log.debug("isReallyLongRunningConversation? " + ret);
+      
+      return ret;
    }
    
    public boolean isNestedConversation()
@@ -358,6 +365,7 @@ public class Manager
 
    public void setLongRunningConversation(boolean isLongRunningConversation)
    {
+      log.debug("setLongRunningConversation: " + isLongRunningConversation);
       this.isLongRunningConversation = isLongRunningConversation;
    }
 
@@ -631,6 +639,7 @@ public class Manager
          boolean removeAfterRedirect = ce.isRemoveAfterRedirect() && !Pages.isDebugPage(); //TODO: hard dependency to JSF!!
          if (removeAfterRedirect)
          {
+            log.debug("remove after redirect!");
             setLongRunningConversation(false);
             ce.setRemoveAfterRedirect(false);
          }
