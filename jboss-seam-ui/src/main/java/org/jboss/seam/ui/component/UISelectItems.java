@@ -169,16 +169,26 @@ public abstract class UISelectItems extends javax.faces.component.UISelectItems 
    public abstract void setItemValue(Object itemValue);
 
    @Override
+   public void decode(FacesContext context) {
+      addConverterChainIfRequired();
+      super.decode(context);
+   }
+   
+   @Override
    public void encodeEnd(FacesContext context) throws IOException {
-	   if(isShowNoSelectionLabel()){
-		   ConverterChain converterChain = new ConverterChain(this.getParent());
-		   Converter noSelectionConverter = new NoSelectionConverter();
-		   // Make sure that the converter is only added once
-		   if (!converterChain.containsConverterType(noSelectionConverter)) {
-			   converterChain.addConverterToChain(noSelectionConverter, ConverterChain.CHAIN_START);
-		   }
-	   }
+       addConverterChainIfRequired();
 	   super.encodeEnd(context);
+   }
+   
+   private void addConverterChainIfRequired() {
+      if(isShowNoSelectionLabel()){
+         ConverterChain converterChain = new ConverterChain(this.getParent());
+         Converter noSelectionConverter = new NoSelectionConverter();
+         // Make sure that the converter is only added once
+         if (!converterChain.containsConverterType(noSelectionConverter)) {
+             converterChain.addConverterToChain(noSelectionConverter, ConverterChain.CHAIN_START);
+         }
+     }
    }
    
    @Override
