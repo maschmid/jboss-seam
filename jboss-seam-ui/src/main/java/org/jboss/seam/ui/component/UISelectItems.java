@@ -170,14 +170,14 @@ public abstract class UISelectItems extends javax.faces.component.UISelectItems 
 
    @Override
    public void decode(FacesContext context) {
-      addConverterChainIfRequired();
       super.decode(context);
+      addConverterChainIfRequired();
    }
    
    @Override
    public void encodeEnd(FacesContext context) throws IOException {
-       addConverterChainIfRequired();
-	   super.encodeEnd(context);
+      super.encodeEnd(context);
+      addConverterChainIfRequired();
    }
    
    private void addConverterChainIfRequired() {
@@ -188,7 +188,7 @@ public abstract class UISelectItems extends javax.faces.component.UISelectItems 
          if (!converterChain.containsConverterType(noSelectionConverter)) {
              converterChain.addConverterToChain(noSelectionConverter, ConverterChain.CHAIN_START);
          }
-     }
+      }
    }
    
    @Override
@@ -353,5 +353,4 @@ public abstract class UISelectItems extends javax.faces.component.UISelectItems 
          return Arrays.asList((Object[]) array);
       }
    }
-	
 }
