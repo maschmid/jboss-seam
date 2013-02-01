@@ -1,5 +1,7 @@
 package org.jboss.seam.jsf;
 
+import static org.jboss.seam.core.Manager.REDIRECT_FROM_MANAGER;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -97,16 +99,21 @@ public class SeamViewHandler extends ViewHandlerWrapper
        Manager manager = Manager.instance();
        String conversationIdParameter = manager.getConversationIdParameter();
 
-       if (!getSource().equals(Source.BOOKMARKABLE) )
+       if (!getSource().equals(Source.BOOKMARKABLE) && !getSource().equals(Source.REDIRECT) && Contexts.isEventContextActive() 
+             && !Contexts.getEventContext().isSet(REDIRECT_FROM_MANAGER))
        {
           if ( !conversation.isNested() || conversation.isLongRunning() )
           {
+             System.out.println("XXX SeamViewHandler adding cid");
+             
              return new FacesUrlTransformer(actionUrl, facesContext)
              .appendConversationIdIfNecessary(conversationIdParameter, conversation.getId())
              .getUrl();
           }
           else
           {
+             System.out.println("XXX SeamView adding parent cid");
+             
              return new FacesUrlTransformer(actionUrl, facesContext)
              .appendConversationIdIfNecessary(conversationIdParameter, conversation.getParentId())
              .getUrl();

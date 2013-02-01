@@ -169,6 +169,11 @@ public class FacesManager extends Manager
          throw new RedirectException("cannot redirect to a null viewId");
       }
       FacesContext context = FacesContext.getCurrentInstance();
+      
+      try
+      {  
+         Contexts.getEventContext().set(REDIRECT_FROM_MANAGER, "");
+      
       String url = context.getApplication().getViewHandler().getActionURL(context, viewId);
       if (parameters!=null) 
       {
@@ -187,6 +192,12 @@ public class FacesManager extends Manager
          url = encodeConversationId(url, viewId);
       }
       redirect(viewId, context, url);
+      
+      }
+      finally
+      {
+         Contexts.getEventContext().remove(REDIRECT_FROM_MANAGER);
+      }
    }
    
    /**
@@ -204,9 +215,20 @@ public class FacesManager extends Manager
          throw new RedirectException("cannot redirect to a null viewId");
       }
       FacesContext context = FacesContext.getCurrentInstance();
+      
+      try
+      {  
+         Contexts.getEventContext().set(REDIRECT_FROM_MANAGER, "");
+      
+      
       String url = context.getApplication().getViewHandler().getActionURL(context, viewId);
       url = encodeConversationId(url, viewId, conversationId);
       redirect(viewId, context, url);
+      
+      }
+      finally {
+         Contexts.getEventContext().remove(REDIRECT_FROM_MANAGER);
+      }
    }
    
    private void redirect(String viewId, FacesContext context, String url)

@@ -52,6 +52,8 @@ public class RedirectFilter extends AbstractFilter
          @Override
          public void sendRedirect(String url) throws IOException
          {
+            System.out.println("XXX RedirectFilter sendRedirect");
+            
             if ( FacesContext.getCurrentInstance() != null 
                   && Contexts.isEventContextActive() 
                   && !Contexts.getEventContext().isSet(REDIRECT_FROM_MANAGER) )
@@ -61,10 +63,12 @@ public class RedirectFilter extends AbstractFilter
                   String viewId = getViewId(url);
                   if (viewId!=null)
                   {
+                     System.out.println("XXX encoding parameters");
                      url = Pages.instance().encodePageParameters( FacesContext.getCurrentInstance(), url, viewId );
                   }
                   if ( Contexts.isConversationContextActive() )
                   {
+                     System.out.println("XXX appending CID");
                      url = FacesManager.instance().appendConversationIdFromRedirectFilter(url, viewId);
                   }
                }
