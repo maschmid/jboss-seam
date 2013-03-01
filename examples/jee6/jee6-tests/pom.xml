@@ -94,6 +94,14 @@
             <groupId>org.jboss.spec.javax.el</groupId>
             <artifactId>jboss-el-api_2.2_spec</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-warp-jsf</artifactId>
+            <version>1.0.0.Beta1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     
     <build>

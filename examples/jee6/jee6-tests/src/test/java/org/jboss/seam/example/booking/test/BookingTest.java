@@ -43,6 +43,8 @@ public class BookingTest
    {
       return Deployments.bookingDeployment();
    }
+   
+   
 
    @Before
    public void before() {
@@ -54,6 +56,8 @@ public class BookingTest
       Lifecycle.endCall();
    }
 
+   
+   
    @Test
    public void testBookHotel() throws Exception
    {
