@@ -33,10 +33,7 @@ public class ResourceQueryTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.restbayDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "restbay-web.war");
-      web.addClasses(ResourceQueryTest.class);
-      return er;
+      return Deployments.restbayDeployment();
    }
 
    public String[] getQueryPaths()

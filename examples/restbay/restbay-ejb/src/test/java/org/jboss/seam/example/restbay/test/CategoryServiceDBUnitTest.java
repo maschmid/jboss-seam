@@ -12,8 +12,7 @@ import org.jboss.seam.mock.EnhancedMockHttpServletResponse;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,23 +34,21 @@ public class CategoryServiceDBUnitTest extends DBJUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.restbayDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "restbay-web.war");
-      er.addAsLibraries(DependencyResolvers.use(MavenDependencyResolver.class)
-            .configureFrom("pom.xml")
-            .artifact("org.dbunit:dbunit:jar:2.2")
-            .resolveAsFiles());
+      WebArchive web = Deployments.restbayDeployment();
+      web.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
+    		  	.resolve("org.dbunit:dbunit:jar:2.2")
+    		  	.withoutTransitivity()
+                .asFile());
       
       web.addAsResource("org/jboss/seam/example/restbay/test/dbunitdata.xml", "org/jboss/seam/example/restbay/test/dbunitdata.xml");
       
-      web.addClasses(CategoryServiceDBUnitTest.class);
-      return er;
+      return web;
    }
 
    protected void prepareDBUnitOperations() {
       
       setDatabase("hsql");
-      setDatasourceJndiName("java:/restbayDatasource");
+      setDatasourceJndiName("java:/jboss/datasources/ExampleDS");
       
       beforeTestOperations.add(
             new DataSetOperation("org/jboss/seam/example/restbay/test/dbunitdata.xml", DatabaseOperation.CLEAN_INSERT)
