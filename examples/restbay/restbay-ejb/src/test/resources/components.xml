@@ -60,6 +60,4 @@
 	
 	<security:identity authenticate-method="#{testAuthenticator.authenticate}" />
 
-<!--    <component class="org.jboss.seam.transaction.EjbSynchronizations" jndi-name="java:app/jboss-seam/EjbSynchronizations"/>-->
-
 </components>
