@@ -26,16 +26,13 @@ public class LoginTest extends DBJUnitSeamTest {
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment()
     {
-        EnterpriseArchive er = Deployments.seamdiscsDeployment();
-        WebArchive web = er.getAsType(WebArchive.class, "seamdiscs-web.war");
-        web.addClasses(LoginTest.class);
-        return er;
+        return Deployments.seamdiscsDeployment();
     }
 
     @Override
     protected void prepareDBUnitOperations() {
         setDatabase("HSQL");
-        setDatasourceJndiName("java:/jboss/seamdiscsDatasource");
+        setDatasourceJndiName("java:/jboss/datasources/ExampleDS");
         
         beforeTestOperations.add(
                 new DataSetOperation("org/jboss/seam/example/seamdiscs/test/BaseData.xml")
@@ -72,6 +69,8 @@ public class LoginTest extends DBJUnitSeamTest {
             
             @Override
             protected void updateModelValues() throws Exception {
+                System.out.println("XXX: update model values!");
+
                 setValue("#{identity.username}", USERNAME);
                 setValue("#{identity.password}", WRONG_PASSWORD);
             }
@@ -79,12 +78,14 @@ public class LoginTest extends DBJUnitSeamTest {
             @Override
             protected void invokeApplication() throws Exception 
             {
+                System.out.println("XXX: invokeApplication!");
                 invokeAction("#{identity.login}");
             }
             
             @Override
             protected void renderResponse() throws Exception 
             {
+                System.out.println("XXX: render response!");
                 assert !((Boolean) getValue("#{identity.loggedIn}"));
             }
         }.run();

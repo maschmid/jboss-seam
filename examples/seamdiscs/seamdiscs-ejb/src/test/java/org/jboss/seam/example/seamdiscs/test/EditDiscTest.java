@@ -36,16 +36,13 @@ public class EditDiscTest extends DBJUnitSeamTest{
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment()
     {
-        EnterpriseArchive er = Deployments.seamdiscsDeployment();
-        WebArchive web = er.getAsType(WebArchive.class, "seamdiscs-web.war");
-        web.addClasses(EditDiscTest.class);
-        return er;
+        return Deployments.seamdiscsDeployment();
     }
 
     @Override
     protected void prepareDBUnitOperations() {
         setDatabase("HSQL");
-        setDatasourceJndiName("java:/jboss/seamdiscsDatasource");
+        setDatasourceJndiName("java:/jboss/datasources/ExampleDS");
         
         beforeTestOperations.add(
                 new DataSetOperation("org/jboss/seam/example/seamdiscs/test/BaseData.xml")
