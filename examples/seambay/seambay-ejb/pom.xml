@@ -94,7 +94,7 @@
                 </property>
             </activation>
             <properties>
-                <jndiPattern>java:app/seam-booking/#{ejbName}</jndiPattern>
+                <jndiPattern>java:app/seam-seambay/#{ejbName}</jndiPattern>
                 <distributable>false</distributable>
             </properties>
             <build>
