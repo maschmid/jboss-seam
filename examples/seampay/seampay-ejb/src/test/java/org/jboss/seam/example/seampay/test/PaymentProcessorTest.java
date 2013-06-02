@@ -28,10 +28,7 @@ public class PaymentProcessorTest
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment()
     {
-        EnterpriseArchive er = Deployments.seamPayDeployment();
-        WebArchive web = er.getAsType(WebArchive.class, "seampay-web.war");
-        web.addClasses(PaymentProcessorTest.class);
-        return er;
+        return Deployments.seamPayDeployment();
     }
     
     @Test

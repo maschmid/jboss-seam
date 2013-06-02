@@ -15,9 +15,7 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-/**
- *  embedded ejb3 doesn't support timer service, so we are fairly limited on what we can test.
- */
+
 @RunWith(Arquillian.class)
 public class AccountTest 
     extends JUnitSeamTest
@@ -26,10 +24,7 @@ public class AccountTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.seamPayDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "seampay-web.war");
-      web.addClasses(AccountTest.class);
-      return er;
+      return Deployments.seamPayDeployment();
    }
     
     @Test
