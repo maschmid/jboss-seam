@@ -51,10 +51,7 @@ public class CategoryResourceTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.tasksDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "tasks-web.war");
-      web.addClasses(CategoryResourceTest.class);
-      return er;
+      return Deployments.tasksDeployment();
    }
 
    @Test

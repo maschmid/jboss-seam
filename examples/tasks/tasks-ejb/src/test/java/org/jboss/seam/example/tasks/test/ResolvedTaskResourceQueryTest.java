@@ -32,7 +32,6 @@ import org.jboss.seam.mock.EnhancedMockHttpServletResponse;
 import org.jboss.seam.mock.JUnitSeamTest;
 import org.jboss.seam.mock.ResourceRequestEnvironment;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -53,10 +52,7 @@ public class ResolvedTaskResourceQueryTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.tasksDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "tasks-web.war");
-      web.addClasses(ResolvedTaskResourceQueryTest.class);
-      return er;
+      return Deployments.tasksDeployment();
    }
     
    // We could do this BeforeClass only once but we can't do ResourceRequests there
