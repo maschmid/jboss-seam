@@ -22,7 +22,7 @@
         <!--<maven.user.settings>/path/to/custom/settings.xml</maven.user.settings>-->
         
         <version.commons.logging>1.1.1</version.commons.logging>
-        <version.shrinkwrap.resolver>2.0.0-beta-4-SNAPSHOT</version.shrinkwrap.resolver>
+        <version.shrinkwrap.resolver>2.0.0-cr-1-SNAPSHOT</version.shrinkwrap.resolver>
         
         <!-- Plugin versions -->
         <version.dependency.plugin>2.5.1</version.dependency.plugin>
