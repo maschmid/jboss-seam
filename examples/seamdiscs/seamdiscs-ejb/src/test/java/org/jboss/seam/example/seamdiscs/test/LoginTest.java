@@ -69,8 +69,6 @@ public class LoginTest extends DBJUnitSeamTest {
             
             @Override
             protected void updateModelValues() throws Exception {
-                System.out.println("XXX: update model values!");
-
                 setValue("#{identity.username}", USERNAME);
                 setValue("#{identity.password}", WRONG_PASSWORD);
             }
@@ -78,14 +76,12 @@ public class LoginTest extends DBJUnitSeamTest {
             @Override
             protected void invokeApplication() throws Exception 
             {
-                System.out.println("XXX: invokeApplication!");
                 invokeAction("#{identity.login}");
             }
             
             @Override
             protected void renderResponse() throws Exception 
             {
-                System.out.println("XXX: render response!");
                 assert !((Boolean) getValue("#{identity.loggedIn}"));
             }
         }.run();
