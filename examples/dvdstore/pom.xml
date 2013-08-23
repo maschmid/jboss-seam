@@ -15,7 +15,12 @@
     
     <properties>
         <example.name>dvdstore</example.name>
-        
+
+        <!-- To use jacoco, set jacoco.agent system property to something like 
+            -javaagent:/path/to/jacocoagent.jar=append=true,destfile=/path/to/output/jacoco.exec -->
+        <jacoco.agent />
+       
+ 
         <version.commons.logging>1.1.1</version.commons.logging>
     </properties>
     

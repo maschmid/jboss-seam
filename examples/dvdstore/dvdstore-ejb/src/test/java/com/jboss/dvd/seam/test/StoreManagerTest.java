@@ -23,15 +23,12 @@ public class StoreManagerTest
    extends JUnitSeamTest
 {
    
-   @Deployment(name = "StoreManagerTest")
-   @OverProtocol("Servlet 3.0")
-   public static Archive<?> createDeployment()
-   {
-      WebArchive web = ShrinkWrap.create(ZipImporter.class, "seam-dvdstore.war").importFrom(new File("target/seam-dvdstore.war")).as(WebArchive.class);
-      web.addPackages(true, Accept.class.getPackage());
-
-      return web;
-   }
+    @Deployment(name = "StoreManagerTest")
+    @OverProtocol("Servlet 3.0")
+    public static Archive<?> createDeployment()
+    {   
+        return Deployments.dvdStoreDeployment();
+    }
    
     @Test
     public void testTopProducts() 

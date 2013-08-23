@@ -25,15 +25,12 @@ import com.jboss.dvd.seam.Product;
 public class ProductUnitTest 
    extends JUnitSeamTest
 {
-   @Deployment(name = "ProductUnitTest")
-   @OverProtocol("Servlet 3.0")
-   public static Archive<?> createDeployment()
-   {
-      WebArchive web = ShrinkWrap.create(ZipImporter.class, "seam-dvdstore.war").importFrom(new File("target/seam-dvdstore.war")).as(WebArchive.class);
-      web.addPackages(true, Accept.class.getPackage());
-
-      return web;
-   }
+    @Deployment(name = "ProductUnitTest")
+    @OverProtocol("Servlet 3.0")
+    public static Archive<?> createDeployment()
+    {   
+        return Deployments.dvdStoreDeployment();
+    }
    
     @Ignore //AS7-4576
     @Test
