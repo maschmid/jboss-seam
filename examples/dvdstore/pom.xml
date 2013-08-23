@@ -15,12 +15,18 @@
     
     <properties>
         <example.name>dvdstore</example.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
 
         <!-- To use jacoco, set jacoco.agent system property to something like 
             -javaagent:/path/to/jacocoagent.jar=append=true,destfile=/path/to/output/jacoco.exec -->
         <jacoco.agent />
-       
- 
+
+        <version.surefire.plugin>2.10</version.surefire.plugin>
+        <version.compiler.plugin>2.3.1</version.compiler.plugin>
+        <version.ear.plugin>2.6</version.ear.plugin>
+        <version.war.plugin>2.1.1</version.war.plugin>
         <version.commons.logging>1.1.1</version.commons.logging>
     </properties>
     
@@ -63,5 +69,35 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Manage plugin versions for build stability -->
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <org.apache.maven.user-settings>${maven.user.settings}</org.apache.maven.user-settings>
+                            <maven.profiles>${maven.profiles}</maven.profiles>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${version.dependency.plugin}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.compiler.plugin}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     
 </project>
