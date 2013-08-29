@@ -17,6 +17,7 @@ import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,20 +34,19 @@ public class GuiceTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive ear = ShrinkWrap.create(ZipImporter.class, "seam-guice.ear").importFrom(new File("../guice-ear/target/seam-guice.ear"))
-            .as(EnterpriseArchive.class);
+      File[] libs = Maven.resolver().loadPomFromFile("pom.xml")
+            .importCompileAndRuntimeDependencies()
+            // force resolve jboss-seam, because it is provided-scoped in the pom, but we need it bundled in the WAR
+            .resolve("org.jboss.seam:jboss-seam").withTransitivity().asFile();
 
-      // Install org.jboss.seam.mock.MockSeamListener
-      WebArchive web = ear.getAsType(WebArchive.class, "guice-web.war");
-      web.delete("/WEB-INF/web.xml");
-      web.addAsWebInfResource("web.xml");
-
-      web.addClasses(GuiceTest.class);
-      
-      JavaArchive ejb =  ear.getAsType(JavaArchive.class, "guice-ejb.jar");
-      ejb.addClasses(JuiceTestBar.class);
-      
-      return ear;
+      return ShrinkWrap.create(WebArchive.class, "seam-guice.war")
+              .addPackage(Juice.class.getPackage())
+              .addClass(JuiceTestBar.class)
+              .addAsWebInfResource("components.xml", "components.xml")
+              .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
+              .addAsWebInfResource("seam.properties", "classes/seam.properties")
+              .addAsWebInfResource("web.xml", "web.xml")
+              .addAsLibraries(libs);
    }
 
    @Test
