@@ -35,10 +35,7 @@ public class BookingTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = Deployments.iceFacesDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "icefaces-web.war");
-      web.addClasses(BookingTest.class);
-      return er;
+      return Deployments.iceFacesDeployment();
    }
 
    @Test

@@ -19,12 +19,7 @@ public class LoginTest extends JUnitSeamTest {
    @Deployment(name = "LoginTest")
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment() {
-      EnterpriseArchive er = Deployments.iceFacesDeployment();
-      WebArchive web = er.getAsType(WebArchive.class, "icefaces-web.war");
-
-      web.addClasses(LoginTest.class);
-
-      return er;
+      return Deployments.iceFacesDeployment();
    }
 
    @Test
