@@ -9,11 +9,17 @@
     
     <properties>
         <example.name>metawidget-groovybooking</example.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+
+        <version.build-helper.plugin>1.7</version.build-helper.plugin> 
+        <version.war.plugin>2.1.1</version.war.plugin>
+        <version.metawidget>2.4</version.metawidget>
     </properties>
     
     <modules>
         <module>groovybooking-web</module>
-        
     </modules>
     
     <dependencyManagement>
@@ -25,5 +31,15 @@
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
-        <!-- BOMs -->             <dependency>                 <groupId>org.jboss.seam</groupId>                 <artifactId>bom</artifactId>                 <version>${project.version}</version>                 <type>pom</type>                 <scope>import</scope>             </dependency> </dependencies></dependencyManagement>
+
+            <!-- BOMs -->
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

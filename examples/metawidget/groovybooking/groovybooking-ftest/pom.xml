@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.seam.examples.metawidget</groupId>
-        <artifactId>booking</artifactId>
+        <artifactId>metawidget-groovybooking</artifactId>
         <version>2.3.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
     <groupId>org.jboss.seam.examples.metawidget</groupId>
-    <artifactId>booking-ftest</artifactId>
-    <name>Metawidget Booking Functional Tests Module (EE6)</name>
+    <artifactId>metawidget-groovybooking-ftest</artifactId>
+    <name>Metawidget Groovy Booking Functional Tests Module (EE6)</name>
     
     <properties>
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
