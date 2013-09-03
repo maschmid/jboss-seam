@@ -4,6 +4,8 @@ package org.jboss.seam.example.todo.test;
 import java.io.File;
 import java.util.List;
 
+import org.jboss.seam.example.todo.Login;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OverProtocol;
 import org.jboss.arquillian.junit.Arquillian;
@@ -13,8 +15,8 @@ import org.jboss.seam.mock.JUnitSeamTest;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jbpm.taskmgmt.exe.TaskInstance;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +28,22 @@ public class TodoTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      EnterpriseArchive er = ShrinkWrap.create(ZipImporter.class, "seam-todo.ear").importFrom(new File("../todo-ear/target/seam-todo.ear")).as(EnterpriseArchive.class);
-      WebArchive web = er.getAsType(WebArchive.class, "todo-web.war");
-      web.addClasses(TodoTest.class);
-      return er;
+      File[] libs = Maven.resolver().loadPomFromFile("pom.xml")
+                .importCompileAndRuntimeDependencies()
+                // force resolve jboss-seam, because it is provided-scoped in the pom, but we need it bundled in the WAR
+                .resolve("org.jboss.seam:jboss-seam")
+                .withTransitivity().asFile();
+
+        return ShrinkWrap.create(WebArchive.class, "seam-todo.war")
+                .addPackage(Login.class.getPackage())
+                .addAsWebInfResource("components.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
+                .addAsResource("seam.properties")
+                .addAsWebInfResource("web.xml")
+                .addAsWebInfResource("jbpm.cfg.xml", "classes/jbpm.cfg.xml")
+                .addAsWebInfResource("hibernate.cfg.xml", "classes/hibernate.cfg.xml")
+                .addAsWebInfResource("todo.jpdl.xml", "classes/todo.jpdl.xml")
+                .addAsLibraries(libs);
    }
    
    private long taskId;
