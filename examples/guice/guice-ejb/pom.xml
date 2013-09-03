@@ -89,7 +89,7 @@
                 </property>
             </activation>
             <properties>
-                <jndiPattern>java:app/seam-contactlist/#{ejbName}</jndiPattern>
+                <jndiPattern>java:app/seam-guice/#{ejbName}</jndiPattern>
                 <distributable>false</distributable>
             </properties>
             <build>
