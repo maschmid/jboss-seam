@@ -9,10 +9,13 @@ import org.jboss.seam.example.numberguess.NumberGuess;
 import org.jboss.seam.mock.JUnitSeamTest;
 import org.jboss.seam.pageflow.Pageflow;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.File;
 
 @RunWith(Arquillian.class)
 public class NumberGuessTest extends JUnitSeamTest {
@@ -22,13 +25,22 @@ public class NumberGuessTest extends JUnitSeamTest {
     @Deployment(name = "NumberGuessTest")
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment() {
-        EnterpriseArchive er = Deployments.numberGuessDeployment();
-        WebArchive web = er.getAsType
-                (WebArchive.class, "numberguess-web.war");
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml")
+                .importCompileAndRuntimeDependencies()
+                // force resolve jboss-seam, because it is provided-scoped in the pom, but we need it bundled in the WAR
+                .resolve("org.jboss.seam:jboss-seam")
+                .withTransitivity().asFile();
 
-        web.addClasses(NumberGuessTest.class);
-
-        return er;
+        return ShrinkWrap.create(WebArchive.class, "seam-numberguess.war")
+                .addPackage(NumberGuess.class.getPackage())
+                .addAsWebInfResource("components.xml")
+                .addAsWebInfResource("pages.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
+                .addAsResource("seam.properties")
+                .addAsWebInfResource("web.xml")
+                .addAsWebInfResource("pageflow.jpdl.xml", "classes/pageflow.jpdl.xml")
+                .addAsWebInfResource("cheat.jpdl.xml", "classes/cheat.jpdl.xml")
+                .addAsLibraries(libs);
     }
 
     @Test
