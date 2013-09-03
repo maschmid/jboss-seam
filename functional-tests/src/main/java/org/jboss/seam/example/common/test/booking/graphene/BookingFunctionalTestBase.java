@@ -71,7 +71,12 @@ public class BookingFunctionalTestBase extends SeamGrapheneTest {
         }
         type(getBy("LOGIN_USERNAME_FIELD"), username);
         type(getBy("LOGIN_PASSWORD_FIELD"), password);
-        clickAndWaitHttp(getBy("LOGIN_SUBMIT"));
+        if ("TRUE".equalsIgnoreCase(getProperty("USE_AJAX_LOGIN"))) {
+           clickAndWaitAjax(getBy("LOGIN_SUBMIT"));
+        }
+        else {
+           clickAndWaitHttp(getBy("LOGIN_SUBMIT"));
+        }
         return isLoggedIn();
     }
 
