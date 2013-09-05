@@ -13,6 +13,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
 
+        <version.surefire.plugin>2.10</version.surefire.plugin>
         <version.build-helper.plugin>1.7</version.build-helper.plugin> 
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.metawidget>2.4</version.metawidget>
@@ -42,4 +43,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Manage plugin versions for build stability -->
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
