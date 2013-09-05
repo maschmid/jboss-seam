@@ -14,7 +14,7 @@
     
     <properties>
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
-        <testDeployment>${basedir}/../booking-ear/target/seam-booking.ear</testDeployment>
+        <testDeployment>${basedir}/../booking-ear/target/seam-metawidget-booking.ear</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>
     </properties>
    

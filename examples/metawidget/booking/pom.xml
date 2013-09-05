@@ -78,6 +78,10 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${version.dependency.plugin}</version>
                 </plugin>
