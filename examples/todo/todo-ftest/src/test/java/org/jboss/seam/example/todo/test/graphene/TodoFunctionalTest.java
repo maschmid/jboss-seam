@@ -33,7 +33,6 @@ import org.jboss.seam.example.common.test.DeploymentResolver;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
