@@ -33,6 +33,7 @@ import org.jboss.seam.example.common.test.DeploymentResolver;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -56,24 +57,24 @@ public class TodoFunctionalTest extends SeamGrapheneTest
    public static final String NTH_ITEM_PRIORITY = "id=list:items:{0}:priority";
    public static final String NTH_ITEM_DONE = "id=list:items:{0}:done";
    public static final String ITEMS_COUNT = "xpath=//table[@id=\"list:items\"]/tbody/tr";
-   public static final String ITEMS_UPDATE = "list:update";
+   public static final String ITEMS_UPDATE = "id=list:update";
    
    
    public static final String DEFAULT_USERNAME = "tester";
+   
+   private static boolean prepared = false;
    
    @Deployment(testable = false)
    public static Archive<?> createDeployment() {
        return DeploymentResolver.createDeployment();
    }
    
-   @Before
    public void prepareTestFixture() {
       String[] fixture = {"selenium test for todo example", "buy milk", "clean the bathroom"};
-      setUp();
       assertTrue("Item list should be empty", isElementPresent(getBy(NO_ITEMS_FOUND)));
       for (String item : fixture) {
          type(getBy(NEW_ITEM_DESCRIPTION), item);
-         clickAndWaitAjax(getBy(NEW_ITEM_CREATE));
+         clickAndWaitHttp(getBy(NEW_ITEM_CREATE));
       }
       assertEquals("Unexpected count of items.", fixture.length, getXpathCount(getBy(ITEMS_COUNT)));
    }
@@ -82,15 +83,20 @@ public class TodoFunctionalTest extends SeamGrapheneTest
    public void setUp() {
       open(contextPath + LOGIN_URL);
       type(getBy(LOGIN_USERNAME), DEFAULT_USERNAME, true);
-      clickAndWaitAjax(getBy(LOGIN_SUBMIT));
+      clickAndWaitHttp(getBy(LOGIN_SUBMIT));
       assertTrue("Navigation failure. Todo page expected.", browser.getCurrentUrl().contains(TODO_URL));
+      
+      if (!prepared) {
+         prepareTestFixture();
+         prepared = true;
+      }
    }
    
    @Test
    public void getEntryDoneTest() {
       String description = browser.findElement(getBy(FIRST_ITEM_DESCRIPTION)).getAttribute("value");
       int itemCount = getXpathCount(getBy(ITEMS_COUNT));
-      clickAndWaitAjax(getBy(FIRST_ITEM_DONE));
+      clickAndWaitHttp(getBy(FIRST_ITEM_DONE));
       assertFalse("Item should disappear from item list when done.", isTextOnPage(description));
       assertEquals("Unexpected count of items.", --itemCount, getXpathCount(getBy(ITEMS_COUNT)));
    }
@@ -105,7 +111,7 @@ public class TodoFunctionalTest extends SeamGrapheneTest
       int itemCount = getXpathCount(getBy(ITEMS_COUNT));
       int lastItemRowId = itemCount - 1;
       type(getBy(FIRST_ITEM_PRIORITY), priority, true);
-      clickAndWaitAjax(getBy(ITEMS_UPDATE));
+      clickAndWaitHttp(getBy(ITEMS_UPDATE));
       
       String nthItemDescription = browser.findElement(getBy(NTH_ITEM_DESCRIPTION, lastItemRowId)).getAttribute("value");
       assertEquals("Message should move to the end of item list after priority change.", description, nthItemDescription);
