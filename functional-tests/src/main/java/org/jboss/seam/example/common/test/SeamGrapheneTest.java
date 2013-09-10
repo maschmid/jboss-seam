@@ -149,6 +149,8 @@ public abstract class SeamGrapheneTest {
             return By.cssSelector(locator);
         } else if (seleniumLocator.startsWith("link")) {
             return By.linkText(locator);
+        } else if (seleniumLocator.startsWith("name")) {
+            return By.name(locator);
         } else {
             return null;
         }
@@ -216,6 +218,10 @@ public abstract class SeamGrapheneTest {
 
     public void selectByText(By by, Object value) {
         new Select(browser.findElement(by)).selectByVisibleText(String.valueOf(value));
+    }
+    
+    public void selectByIndex(By by, int index) {
+       new Select(browser.findElement(by)).selectByIndex(index);
     }
 
     public void openWindow(String url, String name) {
