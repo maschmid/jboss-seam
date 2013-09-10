@@ -42,7 +42,7 @@ import org.junit.runner.RunWith;
  */
 @RunAsClient
 @RunWith(Arquillian.class)
-public class NumberguessFunctionalTest extends SeamGrapheneTest
+public class CommonNumberguessFunctionalTest extends SeamGrapheneTest
 {
    @Deployment(testable = false)
    public static Archive<?> createDeployment() {
