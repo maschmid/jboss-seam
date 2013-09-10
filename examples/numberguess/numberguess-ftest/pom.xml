@@ -114,39 +114,6 @@
             </testResource>
         </testResources>
         <plugins>
-            <!-- Unpack common numberguess tests from org.jboss.seam:functional-tests -->
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jboss.seam</groupId>
-                                    <artifactId>functional-tests</artifactId>
-                                    <version>${project.version}</version>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/test-classes
-                                    </outputDirectory>
-                                    <includes>
-                                        **/numberguess/graphene/*
-                                    </includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
-            
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
