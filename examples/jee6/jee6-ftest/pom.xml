@@ -14,7 +14,7 @@
     <name>Booking Example EE6 Functional Test</name>
 
     <properties>
-        <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
+        <version.org.jboss.arquillian.extension.drone>1.2.0.Beta2</version.org.jboss.arquillian.extension.drone>
         <testDeployment>${basedir}/../jee6-web/target/jee6-web.war</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>
     </properties>

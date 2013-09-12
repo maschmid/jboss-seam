@@ -13,7 +13,7 @@
     <name>Metawidget Booking Functional Tests Module (EE6)</name>
     
     <properties>
-        <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
+        <version.org.jboss.arquillian.extension.drone>1.2.0.Beta2</version.org.jboss.arquillian.extension.drone>
         <testDeployment>${basedir}/../booking-ear/target/seam-metawidget-booking.ear</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>
     </properties>

@@ -13,7 +13,7 @@
     <name>Chatroom Example Functional Test (EE6)</name>
 
     <properties>
-        <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
+        <version.org.jboss.arquillian.extension.drone>1.2.0.Beta2</version.org.jboss.arquillian.extension.drone>
         <jms.provider.file>jboss-seam-chatroom-hornetq-jms.xml</jms.provider.file>
         <testDeployment>${basedir}/../chatroom-ear/target/seam-chatroom.ear</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>

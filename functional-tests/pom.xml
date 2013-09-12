@@ -11,7 +11,7 @@
     <name>Seam Functional Tests Common Classes</name>
 
     <properties>
-        <version.graphene>2.0.0.Alpha4</version.graphene>
+        <version.graphene>2.0.0.Alpha5</version.graphene>
     </properties>
 
     <dependencies>
