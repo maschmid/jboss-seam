@@ -53,7 +53,7 @@ public class NumberguessFunctionalTest extends CommonNumberguessFunctionalTest
       }
       else
       {
-         if (isElementPresent(getBy("GUESS_MENU")))
+         if (isElementPresent(getBy("GUESS_MENU_BUTTON")))
          {
             browser.findElement(getBy("GUESS_MENU_BUTTON")).click();
             waitGui(browser).until().element(getBy("GUESS_MENU")).is().not().visible();
