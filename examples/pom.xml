@@ -123,27 +123,38 @@
                 <module>blog/blog-ftest</module>
                 <module>booking/booking-ftest</module>
                 <module>contactlist/contactlist-ftest</module>
+                <module>drools/drools-ftest</module>
+                <module>dvdstore/dvdstore-ftest</module>
                 <module>excel/excel-ftest</module>
                 <module>groovybooking/groovybooking-ftest</module>
+                <module>guice/guice-ftest</module>
                 <module>hibernate/hibernate-ftest</module>
+                <module>icefaces/icefaces-ftest</module>
                 <module>itext/itext-ftest</module>
                 <module>jee6/jee6-ftest</module>
                 <module>jpa/jpa-ftest</module>
                 <module>mail/mail-ftest</module>
                 <module>messages/messages-ftest</module>
+                <module>metawidget/booking/booking-ftest</module>
+                <module>metawidget/groovybooking/groovybooking-ftest</module>
                 <module>nestedbooking/nestedbooking-ftest</module>
+                <module>numberguess/numberguess-ftest</module>
                 <module>openid/openid-ftest</module>
                 <module>quartz/quartz-ftest</module>
                 <module>registration/registration-ftest</module>
                 <module>remoting/chatroom/chatroom-ftest</module>
+                <module>remoting/gwt/gwt-ftest</module>
                 <module>remoting/helloworld/helloworld-ftest</module>
+                <module>rss/rss-ftest</module>
                 <module>seambay/seambay-ftest</module>
                 <module>seamdiscs/seamdiscs-ftest</module>
                 <module>seampay/seampay-ftest</module>
                 <module>seamspace/seamspace-ftest</module>
                 <module>spring/spring-ftest</module>
                 <module>tasks/tasks-ftest</module>
+                <module>todo/todo-ftest</module>
                 <module>ui/ui-ftest</module>
+                <module>wicket/wicket-ftest</module>
             </modules>
         </profile>
         
