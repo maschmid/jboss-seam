@@ -10,7 +10,7 @@
     
     <groupId>org.jboss.seam.examples.wicket</groupId>
     <artifactId>wicket-ftest</artifactId>
-    <name>Booking Functional Tests Module (EE6)</name>
+    <name>Wicket Functional Tests Module (EE6)</name>
     
     <properties>
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
